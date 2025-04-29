@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Código de Barras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .barcode-preview {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Código de Barras</h1>
+        
+        <form onsubmit="generarCodigo(); return false;">
+            <div class="form-group">
+                <label for="codigo">Código GS1-128 (13 dígitos):</label>
+                <input type="text" id="codigo" pattern="\d{13}" placeholder="0112345678901" required>
+            </div>
+            
+            <button type="submit">Generar Código de Barras</button>
+        </form>
+        
+        <div class="barcode-preview" id="barcodePreview"></div>
+    </div>
+
+    <script>
+        function generarCodigo() {
+            const codigo = document.getElementById("codigo").value.trim();
+            
+            if (!codigo) {
+                alert("Por favor ingrese un código");
+                return;
+            }
+            
+            if (!/^\d{13}$/.test(codigo)) {
+                alert("El código debe contener exactamente 13 dígitos");
+                return;
+            }
+            
+            // Redirigir a barcode.php para mostrar el código
+            window.location.href = `barcode.php?code=${codigo}`;
+        }
+    </script>
+</body>
+</html>
